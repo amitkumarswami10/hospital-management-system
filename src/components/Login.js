@@ -14,7 +14,7 @@ function Login() {
 
         // Simulate a server request with a delay
         setTimeout(() => {
-            if (username === "admin" && password === "password") {
+            if (username === "admin" && password === "password@123") {
                 login();
                 navigate("/dashboard");
             } else {
