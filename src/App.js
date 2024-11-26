@@ -8,7 +8,7 @@ import ProtectedRoute from "./components/ProtectedRoute";
 function App() {
     return (
         <AuthProvider>
-            <Router>
+            <Router basename={process.env.PUBLIC_URL}> {/* Add this line */}
                 <Routes>
                     <Route path="/" element={<Login />} />
                     <Route
