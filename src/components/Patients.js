@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "../Patients.css";
+import "../Dashboard.css";
 
 function Patients() {
     const [activeSubTab, setActiveSubTab] = useState("manage");

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../AuthContext";
-import "../Login.css"; // Add this custom CSS file
+import "../Login.css";
 
 function Login() {
     const [username, setUsername] = useState("");
@@ -11,8 +11,6 @@ function Login() {
 
     const handleLogin = (e) => {
         e.preventDefault();
-
-        // Simulate a server request with a delay
         setTimeout(() => {
             if (username === "admin" && password === "password@123") {
                 login();
@@ -24,54 +22,49 @@ function Login() {
     };
 
     return (
-        <div className="login-page">
+        <div className="login-wrapper">
             <div className="login-container">
-                {/* Left Section with Image */}
+                {/* Left Section */}
                 <div className="login-image">
                     <img
-                        src="https://acsonnet.com/wp-content/uploads/2021/05/hospital-management-system-1.jpg" // Replace with a hospital-related image
+                        src="https://acsonnet.com/wp-content/uploads/2021/05/hospital-management-system-1.jpg" // Replace with an actual image URL
                         alt="Hospital Management"
-                        className="img-fluid"
+                        className="responsive-img"
                     />
                 </div>
-                {/* Right Section with Form */}
-                <div className="login-form-container">
-                    <div className="login-card">
-                        <h2 className="login-title">Welcome Back</h2>
-                        <p className="login-subtitle">Log in to manage your hospital system.</p>
-                        <form onSubmit={handleLogin}>
-                            <div className="form-group">
-                                <label htmlFor="username">Username</label>
-                                <input
-                                    type="text"
-                                    id="username"
-                                    className="form-control"
-                                    value={username}
-                                    onChange={(e) => setUsername(e.target.value)}
-                                    placeholder="Enter your username"
-                                    required
-                                />
-                            </div>
-                            <div className="form-group">
-                                <label htmlFor="password">Password</label>
-                                <input
-                                    type="password"
-                                    id="password"
-                                    className="form-control"
-                                    value={password}
-                                    onChange={(e) => setPassword(e.target.value)}
-                                    placeholder="Enter your password"
-                                    required
-                                />
-                            </div>
-                            <button type="submit" className="btn btn-primary w-100 mt-4">
-                                Login
-                            </button>
-                        </form>
-                        <p className="login-footer mt-3">
-                            © 2024 Hospital Management System
-                        </p>
-                    </div>
+
+                {/* Right Section */}
+                <div className="login-form">
+                    <h2 className="login-title">Welcome Back</h2>
+                    <p className="login-subtitle">Log in to manage your hospital system</p>
+                    <form onSubmit={handleLogin}>
+                        <div className="form-group">
+                            <label htmlFor="username">Username</label>
+                            <input
+                                type="text"
+                                id="username"
+                                value={username}
+                                onChange={(e) => setUsername(e.target.value)}
+                                placeholder="Enter your username"
+                                required
+                            />
+                        </div>
+                        <div className="form-group">
+                            <label htmlFor="password">Password</label>
+                            <input
+                                type="password"
+                                id="password"
+                                value={password}
+                                onChange={(e) => setPassword(e.target.value)}
+                                placeholder="Enter your password"
+                                required
+                            />
+                        </div>
+                        <button type="submit" className="btn-primary">
+                            Login
+                        </button>
+                    </form>
+                    <p className="footer">© 2024 Hospital Management System</p>
                 </div>
             </div>
         </div>

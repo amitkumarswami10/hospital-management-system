@@ -1,22 +1,24 @@
-/* Dashboard Layout */
-.dashboard {
-    display: flex;
-    flex-direction: column;
-    height: 100vh;
-    overflow: hidden; /* Prevent scrolling on the entire dashboard */
+/* General Reset */
+body, html {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
 }
 
+/* Header */
 .header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: #007bff;
-    color: white;
     padding: 10px 20px;
-    position: fixed; /* Fix the header at the top */
-    width: 100%; /* Make sure the header takes up full width */
+    background-color: #1e2a47;
+    color: white;
+    position: fixed;
     top: 0;
-    z-index: 1000; /* Ensure the header is on top of other elements */
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    box-sizing: border-box;
 }
 
 .header .logo {
@@ -25,142 +27,388 @@
 }
 
 .header .logo img {
+    width: 40px;
     margin-right: 10px;
 }
 
-.sidebar {
-    position: fixed; /* Fix the sidebar */
-    top: 60px; /* Space for header */
-    left: 0;
-    bottom: 0;
-    width: 200px;
-    background-color: #343a40;
+.header-actions {
+    display: flex;
+    align-items: center;
+}
+
+.toggle-sidebar,
+.logout-btn {
+    background: none;
+    border: none;
     color: white;
-    padding-top: 20px;
-    padding-left: 10px;
-    z-index: 999; /* Make sure the sidebar stays below the header */
-    overflow-y: auto; /* Allow scrolling within the sidebar if necessary */
+    font-size: 18px;
+    cursor: pointer;
+    margin-left: 10px;
+}
+
+.toggle-sidebar {
+    font-size: 24px;
+}
+
+/* Sidebar/Menu */
+.sidebar {
+    position: fixed;
+    top: 50;
+    left: -100%;
+    width: 250px;
+    height: 100%;
+    background-color: #2f3542;
+    color: white;
+    transition: left 0.3s ease;
+    z-index: 999;
+    padding-top: 60px;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.2);
+}
+
+.sidebar.show {
+    left: 0;
 }
 
 .sidebar ul {
     list-style: none;
-    padding-left: 0;
+    padding: 0;
+    margin: 0;
 }
 
 .sidebar ul li {
-    padding: 10px;
+    padding: 15px 20px;
     cursor: pointer;
-}
-
-.sidebar ul li:hover {
-    background-color: #495057;
+    text-transform: capitalize;
 }
 
 .sidebar ul li.active {
-    background-color: #007bff;
+    background-color: #1e90ff;
 }
 
-.logout-btn {
-    background-color: #dc3545;
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    cursor: pointer;
-    font-size: 16px;
-    position: absolute;
-    bottom: 20px;
-    right: 20px; /* Align logout button to the right */
-}
-
-.logout-btn:hover {
-    background-color: #c82333;
-}
-
+/* Main Content */
 .main-content {
-    margin-left: 220px; /* Space for sidebar */
+    margin-top: 60px;
     padding: 20px;
-    margin-top: 60px; /* Space for header */
-    overflow-y: auto; /* Allow scrolling in the main content */
-    flex-grow: 1;
+    transition: margin-left 0.3s ease;
 }
 
+/* Footer */
 .footer {
-    background-color: #343a40;
-    color: white;
     text-align: center;
-    padding: 10px;
-    position: relative;
-    bottom: 0;
-    width: 100%;
+    padding: 10px 20px;
+    background-color: #1e2a47;
+    color: white;
+}
+
+/* Responsive */
+@media screen and (max-width: 768px) {
+    .sidebar {
+        width: 100%;
+        top: 100px;
+    }
 }
 
 
 
+/* General Styles for Analytics */
 .analytics {
     padding: 20px;
+    background-color: #f8f9fa;
+    min-height: 100vh;
+    box-sizing: border-box;
+    overflow-x: hidden; /* Prevent horizontal scrolling */
+    margin-top: 60px; /* Ensure it starts below the header */
 }
 
-.analytics .row {
-    display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
+.analytics h2 {
+    font-size: 28px;
+    font-weight: bold;
+    color: #333;
     margin-bottom: 20px;
+    text-align: center;
+}
+
+/* Cards Row */
+.row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+    margin: 0;
 }
 
 .card {
-    border: none;
-    border-radius: 10px;
-    margin-bottom: 20px;
-}
-
-.card-body {
+    background: white;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
     padding: 20px;
+    flex: 1;
+    max-width: 100%;
+    box-sizing: border-box;
 }
 
-.card h5 {
+.card.text-center {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.card-body h5 {
     font-size: 18px;
+    color: #555;
     margin-bottom: 10px;
 }
 
-.card h3 {
+.card-body h3 {
     font-size: 24px;
-    color: #007bff;
+    color: #1e90ff;
+    font-weight: bold;
 }
 
-.shadow {
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+/* Charts Row */
+.row.mt-4 {
+    margin-top: 30px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
 }
 
-.staff-management .card {
+.card .card-body h5 {
     margin-bottom: 20px;
+    font-size: 20px;
+    font-weight: bold;
+    color: #333;
 }
 
-.staff-management .table th, .staff-management .table td {
-    vertical-align: middle;
+.card .card-body canvas {
+    margin-top: 10px;
+    width: 100% !important; /* Ensure charts scale correctly */
+    height: 300px; /* Allow automatic height adjustment */
+    display: block;
+}
+
+/* Ensure Charts Stay Within Container */
+.card .card-body {
+    overflow-x: hidden; /* Prevent horizontal overflow within charts */
+}
+
+/* Responsive Design */
+@media screen and (max-width: 768px) {
+    .row {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .card {
+        width: 100%; /* Ensure cards use full width */
+    }
+
+    .row.mt-4 {
+        flex-direction: column;
+    }
+
+    .analytics h2 {
+        margin-top: 10px; /* Extra spacing for smaller screens */
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .analytics h2 {
+        font-size: 24px;
+    }
+
+    .card-body h5 {
+        font-size: 16px;
+    }
+
+    .card-body h3 {
+        font-size: 20px;
+    }
+
+    .card .card-body canvas {
+        max-height: 200px; /* Ensure charts fit smaller screens */
+    }
+}
+
+/* Prevent Horizontal Scrolling Globally */
+body, html {
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden; /* Prevent page-wide horizontal scrolling */
+}
+
+
+
+
+/* Improved Form Styling */
+.staff-management .card-body {
+    padding: 20px;
+    background-color: #f8f9fa;
+    border-radius: 10px;
+    box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.staff-management form .mb-3 {
+    margin-bottom: 15px;
+}
+
+.staff-management .form-label {
+    display: block;
+    font-weight: bold;
+    color: #495057;
+    margin-bottom: 5px;
+}
+
+.staff-management .form-control {
+    width: 98%;
+    border-radius: 8px;
+    border: 1px solid #ced4da;
+    padding: 12px 15px;  /* Same padding as buttons */
+    font-size: 16px;     /* Same font size as buttons */
+    background-color: #ffffff;
+    transition: all 0.3s ease;
+}
+
+.staff-management .form-control:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+.staff-management .btn-primary {
+    width: 100%;
+    padding: 12px;  /* Same padding as form-control */
+    font-size: 16px; /* Same font size as form-control */
+    background-color: #007bff;
+    border: none;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+}
+
+.staff-management .btn-primary:hover {
+    background-color: #0056b3;
 }
 
 .staff-management .btn {
-    margin-top: 10px;
+    font-size: 16px; /* Same font size as form-control */
+    padding: 12px;   /* Same padding as form-control */
 }
 
 
-.appointments {
-    padding: 20px;
+/* Table Styling: Add Scroll on Mobile */
+.staff-management .table-container {
+    overflow-x: auto;
+    margin-top: 20px;
+    display: flex;               /* Use Flexbox */
+    justify-content: center;     /* Align horizontally to the center */
+    align-items: center;         /* Align vertically to the center */
+    height: 100%; 
 }
 
-.card {
-    margin-bottom: 20px;
+.staff-management .table-container .table {
+    min-width: 600px; /* Ensure the table fits even in small viewports */
 }
 
-table th,
-table td {
+.staff-management .table th {
+    background-color: #007bff;
+    color: white;
     text-align: center;
+    padding: 12px;
 }
 
-table td button {
-    margin: 0 5px;
+.staff-management .table td {
+    padding: 10px;
+    text-align: center;
+    vertical-align: middle;
 }
 
-.card-body {
-    padding: 20px;
+.staff-management .btn-warning {
+    background-color: #ffc107;
+    border: none;
+    padding: 6px 12px;
+    font-size: 14px;
+    border-radius: 5px;
 }
+
+.staff-management .btn-danger {
+    background-color: #dc3545;
+    border: none;
+    padding: 6px 12px;
+    font-size: 14px;
+    border-radius: 5px;
+}
+
+/* Responsive Adjustments */
+@media screen and (max-width: 768px) {
+    .staff-management .form-control,
+    .staff-management .btn-primary {
+        font-size: 14px;
+        padding: 12px;  /* Consistent padding for mobile */
+    }
+
+    .staff-management .btn {
+        font-size: 14px;
+        padding: 12px;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .staff-management .form-control,
+    .staff-management .btn-primary {
+        font-size: 14px;
+        padding: 12px;  /* Consistent padding for mobile */
+    }
+
+    .staff-management .btn {
+        font-size: 14px;
+        padding: 12px;
+    }
+}
+
+/* Responsive Adjustments */
+@media screen and (max-width: 768px) {
+    .staff-management h2 {
+        font-size: 22px;
+    }
+
+    .staff-management .form-control {
+        font-size: 13px;
+        padding: 8px;
+    }
+
+    .staff-management .btn-primary {
+        font-size: 14px;
+        padding: 10px;
+    }
+
+    .staff-management .btn {
+        font-size: 12px;
+        padding: 6px 8px;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .staff-management h2 {
+        font-size: 20px;
+    }
+
+    .staff-management .form-control {
+        font-size: 12px;
+        padding: 8px;
+    }
+
+    .staff-management .btn-primary {
+        font-size: 14px;
+        padding: 10px;
+    }
+
+    .staff-management .btn {
+        font-size: 11px;
+        padding: 5px 8px;
+    }
+}
+
+

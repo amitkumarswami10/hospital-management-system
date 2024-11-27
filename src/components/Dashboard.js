@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "../Dashboard.css";
-import { useNavigate } from "react-router-dom"; // Import useNavigate
+import { useNavigate } from "react-router-dom";
 import Patients from "./Patients";
 import Appointments from "./Appointments";
 import StaffManagement from "./StaffManagement";
@@ -8,14 +8,19 @@ import Analytics from "./Analytics";
 
 function Dashboard() {
     const [activeTab, setActiveTab] = useState("patients");
-    const navigate = useNavigate(); // Initialize navigate here
+    const [isSidebarOpen, setSidebarOpen] = useState(false);
+    const navigate = useNavigate();
 
-    // Logout function
     const handleLogout = () => {
         if (window.confirm("Are you sure you want to log out?")) {
-            localStorage.removeItem("authToken"); // Clear authentication token or session data
-            navigate("/"); // Redirect to login page
+            localStorage.removeItem("authToken");
+            navigate("/");
         }
+    };
+
+    const handleTabClick = (tab) => {
+        setActiveTab(tab);
+        setSidebarOpen(false); // Close menu after selecting a tab on mobile
     };
 
     return (
@@ -23,38 +28,49 @@ function Dashboard() {
             {/* Header */}
             <header className="header">
                 <div className="logo">
-                    <img src="https://img.freepik.com/premium-vector/hms-logo-hms-letter-hms-letter-logo-design-initials-hms-logo-linked-with-circle-uppercase-monogram-logo-hms-typography-technology-business-real-estate-brand_229120-74540.jpg" alt="Hospital Logo" width="50" height="50" />
+                    <img
+                        src="https://img.freepik.com/premium-vector/hms-logo-hms-letter-hms-letter-logo-design-initials-hms-logo-linked-with-circle-uppercase-monogram-logo-hms-typography-technology-business-real-estate-brand_229120-74540.jpg"
+                        alt="Logo"
+                    />
                     <h2>Hospital Management System</h2>
                 </div>
-                <button className="btn btn-danger logout-btn" onClick={handleLogout}>
-                    Logout
-                </button>
+                <div className="header-actions">
+                    <button
+                        className="toggle-sidebar"
+                        onClick={() => setSidebarOpen(!isSidebarOpen)}
+                    >
+                        ☰
+                    </button>
+                    <button className="logout-btn" onClick={handleLogout}>
+                        Logout
+                    </button>
+                </div>
             </header>
 
-            {/* Sidebar */}
-            <div className="sidebar">
+            {/* Sidebar/Menu */}
+            <div className={`sidebar ${isSidebarOpen ? "show" : ""}`}>
                 <ul>
                     <li
                         className={activeTab === "patients" ? "active" : ""}
-                        onClick={() => setActiveTab("patients")}
+                        onClick={() => handleTabClick("patients")}
                     >
                         Patients
                     </li>
                     <li
                         className={activeTab === "appointments" ? "active" : ""}
-                        onClick={() => setActiveTab("appointments")}
+                        onClick={() => handleTabClick("appointments")}
                     >
                         Appointments
                     </li>
                     <li
                         className={activeTab === "staff" ? "active" : ""}
-                        onClick={() => setActiveTab("staff")}
+                        onClick={() => handleTabClick("staff")}
                     >
                         Staff Management
                     </li>
                     <li
                         className={activeTab === "analytics" ? "active" : ""}
-                        onClick={() => setActiveTab("analytics")}
+                        onClick={() => handleTabClick("analytics")}
                     >
                         Analytics
                     </li>

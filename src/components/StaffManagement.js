@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-
+import "../Dashboard.css";
 function StaffManagement() {
     const [staff, setStaff] = useState([
         { id: 1, name: "John Doe", position: "Doctor", contact: "9876543210" },
@@ -117,35 +117,44 @@ function StaffManagement() {
             <div className="card shadow">
                 <div className="card-body">
                     <h5>Staff List</h5>
-                    <table className="table table-striped">
-                        <thead>
-                            <tr>
-                                <th>Name</th>
-                                <th>Position</th>
-                                <th>Contact</th>
-                                <th>Actions</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {staff.map((staffMember) => (
-                                <tr key={staffMember.id}>
-                                    <td>{staffMember.name}</td>
-                                    <td>{staffMember.position}</td>
-                                    <td>{staffMember.contact}</td>
-                                    <td>
-                                        <button className="btn btn-warning me-2" onClick={() => handleEdit(staffMember.id)}>
-                                            Edit
-                                        </button>
-                                        <button className="btn btn-danger" onClick={() => handleDelete(staffMember.id)}>
-                                            Delete
-                                        </button>
-                                    </td>
+                    <div className="table-container">
+                        <table className="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Position</th>
+                                    <th>Contact</th>
+                                    <th>Actions</th>
                                 </tr>
-                            ))}
-                        </tbody>
-                    </table>
+                            </thead>
+                            <tbody>
+                                {staff.map((staffMember) => (
+                                    <tr key={staffMember.id}>
+                                        <td>{staffMember.name}</td>
+                                        <td>{staffMember.position}</td>
+                                        <td>{staffMember.contact}</td>
+                                        <td>
+                                            <button
+                                                className="btn btn-warning me-2"
+                                                onClick={() => handleEdit(staffMember.id)}
+                                            >
+                                                Edit
+                                            </button>
+                                            <button
+                                                className="btn btn-danger"
+                                                onClick={() => handleDelete(staffMember.id)}
+                                            >
+                                                Delete
+                                            </button>
+                                        </td>
+                                    </tr>
+                                ))}
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
+
         </div>
     );
 }
